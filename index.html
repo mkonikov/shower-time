@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shower Time</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  Today <br /> <span id="name"></span> will be taking the first shower 🚿
+  <script>
+    const NAMES = [
+      { name: 'Chaya', picture: ''},
+      { name: 'Ovi', picture: ''},
+    ]
+    const index = Math.floor(Math. random() * 2);
+    const name = NAMES[index];
+    document.querySelector('#name').innerText = name.name;
+  </script>
+</body>
+</html>
