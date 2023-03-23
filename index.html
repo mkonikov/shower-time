@@ -46,6 +46,24 @@
       justify-content: center;
       height: 100vh;
     }
+
+    #footer-options {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    #refresh {
+      border: 0;
+      margin-bottom: 10px;
+      font-size: 20px;
+      border-radius: 100%;
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+    }
   </style>
 </head>
 <body>
@@ -57,22 +75,44 @@
       </p>
     </div>
   </div>
+  <div id="footer-options">
+    <button id="refresh">&circlearrowleft;</button>
+    <div class="last-updated-text">Last Updated: <span id="last-updated"></span></div>
+  </div>
   <script>
     const NAMES = [
       { name: 'chaya', picture: ''},
       { name: 'ovi', picture: ''},
     ]
-    const index = Math.floor(Math. random() * 2);
-    const selected = NAMES[index];
-    const nameEl = document.querySelector('#name');
-    nameEl.innerText = selected.name;
-    nameEl.classList.add(selected.name);
 
+    function randomize() {
+      const index = Math.floor(Math. random() * 2);
+      const selected = NAMES[index];
+      const nameEl = document.querySelector('#name');
+      nameEl.innerText = selected.name;
+      nameEl.classList.add(selected.name);
+  
+  
+      const imageIndex = Math.floor(Math. random() * 9) + 1;
+  
+      const imageUrl = `./assets/${selected.name}/${imageIndex}.png`;
+      document.querySelector('#image').src = imageUrl;
+  
+      const currHebrewDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'America/New_York', calendar: 'hebrew' }).format();
+  
+      document.querySelector('#last-updated').innerText = currHebrewDate;
+    }
 
-    const imageIndex = Math.floor(Math. random() * 9) + 1;
+    document.getElementById('refresh').addEventListener('click', randomize);
 
-    const imageUrl = `./assets/${selected.name}/${imageIndex}.png`;
-    document.querySelector('#image').src = imageUrl;
+    function init() {
+      randomize();
+    }
+    if (document.readyState !== 'loading'){
+      init();
+    } else {
+      document.addEventListener('DOMContentLoaded', init);
+    }
   </script>
 </body>
 </html>
